@@ -43,6 +43,17 @@
 \newpage
 \section{Análisis del problema}\label{Analisis}
 
+Al comprender el objetivo y funcionamiento del problema hemos concluido que algunos de los retos que se nos presentaran a lo largo del desarrollo de este proyecto seran:
+
+-Uno de los primeros puntos a tener en cuenta sera saber conectar correctamente el ciruito y configurarlo adecuadamente, tener claro con que tipo de leds se trabajara y hacer un estudio previo de como es el funcionamiento de este montaje.
+
+-Crear clases para el modelamiento de objetos: 
+
+Una de las clases mas importantes para este desafio sera la de submuestreo o sobremuestreo, en donde se podran adecuar las dimesiones de las imagenes leidas teniendo previamente claro las dimensiones de los leds ya montados en el circuito.Para este punto en especifico se tendria pensado en multplicar y eliminar, segun sea el caso, los pixeles cada cierta cantidad.
+
+Tambien es importante modelar de manera correcta una clase para la lectura de las imagenes y que en esta misma se genere el archivo txt de salida con la informacion correspondiente, para ello, tenemos en cuenta que otro de los retos sera construir y modelar una clase que genere las matrices de manera eficiente y teniendo en cuenta la gama de colores del RGB para que al pasar la informacion al proyecto en aurduino se pueda apreciar gran parte de la imagen original.
+
+-Por ultimo, en la plataforma de arduino tenemos el desafio de poder escribir la informacion generada por Qt de manera correcta (que los colores y sus limites esten bien definidos) y que no se pierda tanto detalle a comparacion de la imagen original, esto teniendo en cuenta de que ya se ha hecho un estudio de todo el funcionamiento de este tipo de leds.
 
 
 \section{Esquema de tareas} \label{Esquema}
@@ -70,7 +81,65 @@ Lista de tareas:
 
 \section{Algoritmo diseñado}\label{Algoritmo}
 
+1. Función submuestreo: 
 
+Vector de vectores de enteros
+vetorRGB
+
+AnchoFinal=ancho/12
+
+AltoFinal=alto/12
+
+Mientras i!=AnchoFinal*AltoFinal
+    
+\hspace{0.5cm}Para x=0, hasta x menor que AnchoFinal, x=x+1
+
+\hspace{1cm}Para y=0 hasta y menor que AltoFinal, y=y+1
+
+\hspace{1.5cm}Obtener color rojo
+
+\hspace{1.5cm}Obtener color verde
+
+\hspace{1.5cm}Obtener color azul
+
+\hspace{1.5cm}Almacenar los valores en el vector de enteros
+
+\hspace{1.5cm}Y este vector almacenarlo en el vector de vectores
+
+\hspace{1cm}Fin para
+
+\hspace{0.5cm}Fin para
+
+\hspace{0.5cm}tamVec=tamaño vector de vectores
+
+\hspace{0.5cm}Para k=0 menor que tamVec
+
+\hspace{1cm}rojos=rojos+vector de vectores[ posicion k] [posicion 0]
+
+\hspace{1cm}verdes=verdes+vector de vectores[ posicion k] [posicion 1]
+
+\hspace{1cm}azules=azules+vector de vectores[ posicion k] [posicion 2]
+
+\hspace{0.5cm}Fin para
+
+\hspace{0.5cm}rojos/tamVec
+
+\hspace{0.5cm}verdes/tamVec
+
+\hspace{0.5cm}azules/tamVec
+
+\hspace{0.5cm}vectorRGB[0]=rojos
+
+\hspace{0.5cm}vectorRGB[1]=verdes
+
+\hspace{0.5cm}vectorRGB[2]=azules
+
+\hspace{0.5cm}matrizFinal[Posicion]=vectorRGB
+
+\hspace{0.5cm}i=i+1
+\hspace{0.5cm}posicion=posicion+1
+
+Fin mientras
 
 \section{Consideraciones}\label{Consideraciones}
 
