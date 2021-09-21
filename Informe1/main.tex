@@ -80,8 +80,7 @@ Lista de tareas:
 
 
 \section{Algoritmo diseñado}\label{Algoritmo}
-
-1. Función submuestreo: 
+\subsection{Función submuestreo: }
 
 Vector de vectores de enteros
 vetorRGB
@@ -141,8 +140,71 @@ Mientras i!=AnchoFinal*AltoFinal
 
 Fin mientras
 
+\subsection{Funcion sobremuestreo:}
+
+\hspace{0.5cm}inicializacion de contenedores
+
+\hspace{0.5cm}vector de vectores (almacena una matriz completa)
+
+\hspace{0.5cm}vector fila (se almacena cada fila)
+
+\hspace{0.5cm}De acuerdo a la lectura de la imagen se empiezan a almacenar las matrices
+
+\hspace{0.5cm}matrices de acuerdo al RGB con sus dimensiones originales
+
+\hspace{0.5cm}Matriz valores color rojo
+
+\hspace{0.5cm}Matriz valores color verde
+
+\hspace{0.5cm}Matriz valores color azul
+
+\hspace{0.5cm}dimensiones de la matriz= 
+
+\hspace{0.5cm}Ancho original(valor obtenido)xAlto original(valor obtenido)
+
+\hspace{0.5cm}Si las dimensiones de la matriz final es de 12x12 entonces:
+
+\hspace{0.5cm}numero de elementos del vector de vectores= 12 (hay 12 vectores fila)
+
+\hspace{0.5cm}numero de elementos del vector fila= 12 (es decir 12 columnas)
+
+\hspace{0.5cm}se itera sobre la matriz:
+
+\hspace{0.5cm}(Se repite el ciclo con la matriz valores color rojo,verde y azul)
+
+\hspace{0.5cm}i=0, i< alto original, i++
+
+\hspace{1cm}j=0,j< ancho original, j++
+
+\hspace{1cm}se llena el vector de vectores y cada vector fila 
+
+\hspace{1cm}(se itera sobre los vectores)
+
+\hspace{1.5cm}vector de vectores[i]
+
+\hspace{1.5cm}vector fila posicion i[j]
+
+\hspace{1cm}Se asigna el mismo valor a varias posiciones seguidas en el vector
+
+\hspace{1cm}Esto hasta que numero de elementos vector de vectores= 12
+
+\hspace{1cm}Y hasta que el numero de elementos de cada vector fila= 12
+
+\hspace{1cm}(Es decir, se multiplica cada valor para hacer mas grande
+
+\hspace{1cm}la matriz hasta que las dimensiones sean de 12x12)
+
+\hspace{0.5cm}fin del ciclo
+    
+vector de vectores (para cada color)= matriz final en dimension 12x12
+
 \section{Consideraciones}\label{Consideraciones}
 
+-Con respecto al proyecto en Tinkercard hay que tener claro las dimensiones del circuito de neopixeles para que en base de estas se realicen las demas funciones para el programa, ademas del correcto funcionamiento del circuito y las funciones implementadas alli (impresion de la matriz en los neopixeles)
+
+-Tener en cuenta los diferentes tipos de contenedores y elegir el adecuado para este programa para una adecuada implementacion. Tambien tener encuenta la libreria Qimage que ayudara en varios procesos del programa. 
+
+-Tener claro el proceso de implementacion en las funciones de submuestreo y sobremuestreo ya que son las funciones mas importantes en todo el programa, en conjunto con el proceso de implementacion en tinkercard.
 
 
 \end{document}
