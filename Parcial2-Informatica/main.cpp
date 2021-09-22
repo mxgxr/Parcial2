@@ -2,6 +2,7 @@
 #include <QImage>
 #include <vector>
 #include <iterator>
+#include "sobremuestreo.h"
 
 using namespace std;
 
@@ -19,9 +20,9 @@ int main()
 
     QImage imagen(ruta.c_str());
 
+
     anchoProm=imagen.width()/12;
     altoProm=imagen.height()/12;
-
 
     while(contador!=imagen.width()*imagen.height()){
         for(int x=contador; x<anchoProm; x++){
@@ -71,3 +72,4 @@ vector<int> promedioColor(vector<vector<int>> &arr)
 
     return promRGB;
 }
+
