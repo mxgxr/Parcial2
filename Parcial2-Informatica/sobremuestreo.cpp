@@ -4,9 +4,8 @@ Sobremuestreo::Sobremuestreo()
 {
     //leer imagen
     string ruta;
-    int pixel,ancho,alto,avanzar,columna;
-    vector<int>filas,matrizfila;
-    vector<int>vacio;
+    int pixel,pixelanterior,ancho,alto,limite,avanzar,columna;
+    vector<int>filas,matrizfila,filanterior,vacio;
     vector<vector<int>>matrizPixelesrojos,matrizPixelesverdes,matrizPixelesazules,matrizfinal;
 
     cout<<"Ingresar ruta donde se encuentra la imagen"<<endl;
@@ -39,18 +38,37 @@ Sobremuestreo::Sobremuestreo()
     alto=matrizPixelesrojos.size();
     for (int i = 0; i < alto; ++i) {
         ancho=matrizPixelesrojos[i].size();
-        avanzar=12-ancho;
-        avanzar=ancho/avanzar;
-        columna=avanzar;
+        limite=12-ancho;
+        avanzar=ancho/limite;
+        columna=limite;
+        pixel=0;
         for (int j =0; j < ancho; ++j){ //mulriplicar las colummnas
+            pixelanterior=pixel;
             pixel=matrizPixelesrojos[i][j];
-            matrizfila.push_back(pixel);
             if(j==columna+avanzar){
                 columna=j;
-                matrizfila.push_back(pixel);
+                if (pixel==pixelanterior){
+                    matrizfila.push_back(pixel);
+                }
+                else{
+                    matrizfila.push_back(pixelanterior);
+                    matrizfila.push_back(pixel);
+                }
             }
+            matrizfila.push_back(pixel);
         }
         //continuar proceso para las filas
-        matrizfinal.push_back(matrizfila);
+        if(i==1){
+            matrizfinal.push_back(matrizfila);
+            filanterior=matrizfila;
+        }
+        else{
+            matrizfinal.push_back(matrizfila);
+            if(matrizfila==filanterior){
+                matrizfinal.push_back(matrizfila);
+            }
+        }
+        //definir el numero de filas que faltan para completar la matriz 12x12
+
     }
 }
