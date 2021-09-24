@@ -2,11 +2,13 @@
 
 Sobremuestreo::Sobremuestreo()
 {
+    ofstream escribir;
+    escribir.open("../Parcial2-Informatica/archivo.txt");
     //leer imagen
     string ruta;
-    int pixel,pixelanterior,ancho,alto,limite,avanzar,columna;
-    vector<int>filas,matrizfila,filanterior,vacio;
-    vector<vector<int>>matrizPixelesrojos,matrizPixelesverdes,matrizPixelesazules,matrizfinal;
+    int pixel,ancho,alto,limite,avanzarf,avanzarc,columna,fila;
+    vector<int>filas,filanterior,matrizfila,vacio;
+    vector<vector<int>>matrizPixelesrojos,matrizPixelesverdes,matrizPixelesazules;
 
     cout<<"Ingresar ruta donde se encuentra la imagen"<<endl;
     cin>>ruta;
@@ -36,39 +38,46 @@ Sobremuestreo::Sobremuestreo()
     }
     //redimensionar y almacenar en la matriz final
     alto=matrizPixelesrojos.size();
-    for (int i = 0; i < alto; ++i) {
+    limite=12-alto;
+    avanzarf=alto/limite;
+    avanzarf-=1;
+    fila=0;
+    for (int i = 0; i <alto; i++) {
         ancho=matrizPixelesrojos[i].size();
         limite=12-ancho;
-        avanzar=ancho/limite;
-        columna=limite;
-        pixel=0;
-        for (int j =0; j < ancho; ++j){ //mulriplicar las colummnas
-            pixelanterior=pixel;
-            pixel=matrizPixelesrojos[i][j];
-            if(j==columna+avanzar){
-                columna=j;
-                if (pixel==pixelanterior){
-                    matrizfila.push_back(pixel);
-                }
-                else{
-                    matrizfila.push_back(pixelanterior);
-                    matrizfila.push_back(pixel);
+        avanzarc=ancho/limite;
+        avanzarc-=1;
+        columna=0;
+        matrizfila=vacio;
+        for(int colum=0;colum<12;colum++){
+            for (int j =0; j <ancho; j++){ //mulriplicar las colummnas
+                pixel=matrizPixelesrojos[i][j];
+                matrizfila.insert(matrizfila.begin()+colum,pixel);
+                colum++;
+                if(j==columna+avanzarc){
+                    columna=j+1;
+                    matrizfila.insert(matrizfila.begin()+colum,pixel);
+                    colum++;
                 }
             }
-            matrizfila.push_back(pixel);
         }
-        //continuar proceso para las filas
-        if(i==1){
-            matrizfinal.push_back(matrizfila);
-            filanterior=matrizfila;
+        for(size_t columna=0; columna<matrizfila.size(); columna++){
+            escribir<<matrizfila[columna]<<",";
         }
-        else{
-            matrizfinal.push_back(matrizfila);
-            if(matrizfila==filanterior){
-                matrizfinal.push_back(matrizfila);
+        if(i==fila+avanzarf){
+            fila=i+1;
+            escribir<<endl;
+            for(size_t columna=0; columna<matrizfila.size(); columna++){
+                escribir<<matrizfila[columna]<<",";
             }
         }
-        //definir el numero de filas que faltan para completar la matriz 12x12
-
+        escribir<<endl;
+        //Sobremuestreo exitoso, replicar para la matriz de pixeles verdes y azules para tener la imagen lista para visualizar
+    }
+    for (size_t fila=0; fila<matrizPixelesrojos.size(); fila++){
+        for(size_t columna=0; columna<matrizPixelesrojos[fila].size(); columna++){
+            cout<<matrizPixelesrojos[fila][columna]<<",";
+        }
+        cout<<endl;
     }
 }
