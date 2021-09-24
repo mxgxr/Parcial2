@@ -9,8 +9,13 @@ using namespace std;
 
 class Sobremuestreo
 {
+private:
+    string ruta;
+    vector<vector<int>>matrizPixelesrojos,matrizPixelesverdes,matrizPixelesazules;
 public:
-    Sobremuestreo();
+    Sobremuestreo(string);
+    void Lectura();
+    void Redimension();
 };
 
 #endif // SOBREMUESTREO_H
