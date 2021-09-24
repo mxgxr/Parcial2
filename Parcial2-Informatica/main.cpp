@@ -29,9 +29,9 @@ int main()
     anchoProm=imagen.width()/12;
     altoProm=imagen.height()/12;
 
-    for(int y=0; y<12; y+=altoProm){
+    for(int y=0; y+altoProm<imagen.height(); y+=altoProm){
         ytotal=(2*y+altoProm)/2;
-        for(int x=0; x<12; x+=anchoProm){
+        for(int x=0; x+anchoProm<imagen.width(); x+=anchoProm){
             xtotal=(2*x+anchoProm)/2;
             matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).red());
             matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).green());
@@ -100,11 +100,11 @@ string formatoTexto(vector<vector<int>> &array)
         }
         cadena+='}';
         contador=0;
-        if(!i->back()){
+        if(i->back()){
             cadena+=',';
         }
     }
-    cadena+='}';
+    cadena+="};";
     return cadena;
 }
 
