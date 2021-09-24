@@ -20,9 +20,12 @@ int main()
     vector<vector<int>>matrizPixeles;
     vector<int>mRGBprom;
 
-    Sobremuestreo uno;
     cout << "Ingrese la ruta de la imagen a cargar: " << endl;
     cin >> ruta;
+
+    Sobremuestreo uno(ruta);
+    uno.Lectura();
+    uno.Redimension();
 
     QImage imagen(ruta.c_str());
 

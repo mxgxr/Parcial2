@@ -1,18 +1,13 @@
 #include "sobremuestreo.h"
 
-Sobremuestreo::Sobremuestreo()
+Sobremuestreo::Sobremuestreo(string rut)
 {
-    ofstream escribir;
-    escribir.open("../Parcial2-Informatica/archivo.txt");
+    ruta=rut;
+}
+void Sobremuestreo::Lectura(){
+
     //leer imagen
-    string ruta;
-    int pixel,ancho,alto,limite,avanzarf,avanzarc,columna,fila;
-    vector<int>filas,filanterior,matrizfila,vacio;
-    vector<vector<int>>matrizPixelesrojos,matrizPixelesverdes,matrizPixelesazules;
-
-    cout<<"Ingresar ruta donde se encuentra la imagen"<<endl;
-    cin>>ruta;
-
+    vector<int>filas,vacio;
     QImage imagen(ruta.c_str());
 
     for (int fila=0; fila<imagen.height(); fila++){
@@ -36,48 +31,82 @@ Sobremuestreo::Sobremuestreo()
         }
         matrizPixelesazules.push_back(filas);
     }
-    //redimensionar y almacenar en la matriz final
+}
+void Sobremuestreo::Redimension(){
+
+    ofstream escribir;
+    escribir.open("../Parcial2-Informatica/archivo.txt");
+    escribir<<"{";
+
+    int pixelrojo,pixelverde,pixelazul,ancho,alto,limiteAL,limiteAN,avanzarf,avanzarc,columna,fila,cont1,cont2;
+    vector<int> matrizfilaR,matrizfilaG,matrizfilaB,vacio;
+
+    //redimensionar y almacenar la matriz final en el archivo
     alto=matrizPixelesrojos.size();
-    limite=12-alto;
-    avanzarf=alto/limite;
+    limiteAL=12-alto;
+    avanzarf=alto/limiteAL;
     avanzarf-=1;
     fila=0;
+    cont2=0;
     for (int i = 0; i <alto; i++) {
+        cont1=0;
         ancho=matrizPixelesrojos[i].size();
-        limite=12-ancho;
-        avanzarc=ancho/limite;
+        limiteAN=12-ancho;
+        avanzarc=ancho/limiteAN;
         avanzarc-=1;
         columna=0;
-        matrizfila=vacio;
+        matrizfilaR=vacio;
+        matrizfilaG=vacio;
+        matrizfilaB=vacio;
         for(int colum=0;colum<12;colum++){
-            for (int j =0; j <ancho; j++){ //mulriplicar las colummnas
-                pixel=matrizPixelesrojos[i][j];
-                matrizfila.insert(matrizfila.begin()+colum,pixel);
-                colum++;
-                if(j==columna+avanzarc){
-                    columna=j+1;
-                    matrizfila.insert(matrizfila.begin()+colum,pixel);
-                    colum++;
+             for (int j =0; j <ancho; j++){ //mulriplicar las colummnas
+                     pixelrojo=matrizPixelesrojos[i][j];
+                     pixelverde=matrizPixelesverdes[i][j];
+                     pixelazul=matrizPixelesazules[i][j];
+                     matrizfilaR.insert(matrizfilaR.begin()+colum,pixelrojo);
+                     matrizfilaG.insert(matrizfilaG.begin()+colum,pixelverde);
+                     matrizfilaB.insert(matrizfilaB.begin()+colum,pixelazul);
+                     colum++;
+                     if(j==columna+avanzarc){
+                            cont1++;
+                            if(cont1<=limiteAN){
+                            columna=j+1;
+                            matrizfilaR.insert(matrizfilaR.begin()+colum,pixelrojo);
+                            matrizfilaG.insert(matrizfilaG.begin()+colum,pixelverde);
+                            matrizfilaB.insert(matrizfilaB.begin()+colum,pixelazul);
+                            colum++;
+                            }
+                        }
+                    }
+                }
+            for(size_t columna=0; columna<matrizfilaR.size(); columna++){
+                escribir<<"{";
+                escribir<<matrizfilaR[columna]<<",";
+                escribir<<matrizfilaG[columna]<<",";
+                escribir<<matrizfilaB[columna]<<",";
+                escribir<<"}";
+                escribir<<",";
+            }
+            if(i==fila+avanzarf){
+                cont2++;
+                if(cont2<=limiteAL){
+                fila=i+1;
+                escribir<<endl;
+                for(size_t columna=0; columna<matrizfilaR.size(); columna++){
+                    escribir<<"{";
+                    escribir<<matrizfilaR[columna]<<",";
+                    escribir<<matrizfilaG[columna]<<",";
+                    escribir<<matrizfilaB[columna]<<",";
+                    escribir<<"}";
+                    escribir<<",";
+                 }
                 }
             }
-        }
-        for(size_t columna=0; columna<matrizfila.size(); columna++){
-            escribir<<matrizfila[columna]<<",";
-        }
-        if(i==fila+avanzarf){
-            fila=i+1;
             escribir<<endl;
-            for(size_t columna=0; columna<matrizfila.size(); columna++){
-                escribir<<matrizfila[columna]<<",";
-            }
-        }
-        escribir<<endl;
-        //Sobremuestreo exitoso, replicar para la matriz de pixeles verdes y azules para tener la imagen lista para visualizar
+            //Sobremuestreo exitoso
+
     }
-    for (size_t fila=0; fila<matrizPixelesrojos.size(); fila++){
-        for(size_t columna=0; columna<matrizPixelesrojos[fila].size(); columna++){
-            cout<<matrizPixelesrojos[fila][columna]<<",";
-        }
-        cout<<endl;
-    }
+    escribir<<"}";
+    escribir<<";";
+    escribir.close();
 }
