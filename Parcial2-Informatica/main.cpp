@@ -15,6 +15,7 @@ int main()
     vector<int>matrizRGB;
     vector<vector<int>>matrizPixeles;
 
+    Sobremuestreo uno;
     cout << "Ingrese la ruta de la imagen a cargar: " << endl;
     cin >> ruta;
 

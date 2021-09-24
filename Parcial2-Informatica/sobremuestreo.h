@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <QImage>
+#include <fstream>
 
 using namespace std;
 
