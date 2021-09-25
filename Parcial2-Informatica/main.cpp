@@ -8,13 +8,12 @@
 
 using namespace std;
 
-vector<int> promedioColor(vector<vector<int>> &arr);
 string formatoTexto(vector<vector<int>> &array);
 
 int main()
 {
     string ruta, cadena;
-    int cont1=0, altoProm, anchoProm, cont2=0, xtotal=0, ytotal=0;
+    int altoProm, anchoProm, xtotal=0, ytotal=0;
     ofstream fout;
     vector<int>matrizRGB;
     vector<vector<int>>matrizPixeles;
@@ -33,9 +32,9 @@ int main()
     anchoProm=imagen.width()/12;
     altoProm=imagen.height()/12;
 
-    for(int y=0; y+altoProm<imagen.height(); y+=altoProm){
+    for(int y=0; y+altoProm<=imagen.height(); y+=altoProm){
         ytotal=(2*y+altoProm)/2;
-        for(int x=0; x+anchoProm<imagen.width(); x+=anchoProm){
+        for(int x=0; x+anchoProm<=imagen.width(); x+=anchoProm){
             xtotal=(2*x+anchoProm)/2;
             matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).red());
             matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).green());
@@ -58,31 +57,6 @@ int main()
     catch (char a ) {
         if(a==1){cout << "Problema en la escritura del archivo" << endl;}
     }
-
-
-
-/*    while(cont1!=imagen.width()*imagen.height()){
-        for(int x=cont1; x<anchoProm; x++){ //leo el pedacito de los pixeles en x
-            for(int y=cont2; y<altoProm; y++){ //leo el pedacito de los pixeles en y
-                matrizRGB[0]=imagen.pixelColor(x,y).red();
-                matrizRGB[1]=imagen.pixelColor(x,y).green();
-                matrizRGB[2]=imagen.pixelColor(x,y).blue();
-                matrizPixeles.push_back(matrizRGB);
-            }
-            promedioColor(matrizPixeles);
-
-        }
-    }
-
-    for(int x=0; x<imagen.width(); x++){
-        for(int y=0; y<imagen.height(); y++){
-            matrizRGB[contador].push_back(imagen.pixelColor(x,y).red());
-            matrizRGB[contador].push_back(imagen.pixelColor(x,y).green());
-            matrizRGB[contador].push_back(imagen.pixelColor(x,y).blue());
-            contador++;
-        }
-    }*/
-
 
     return 0;
 }
@@ -108,29 +82,9 @@ string formatoTexto(vector<vector<int>> &array)
             cadena+=',';
         }
     }
+    cadena.pop_back();
     cadena+="};";
     return cadena;
 }
 
-vector<int> promedioColor(vector<vector<int>> &arr)
-{
-    //vector<vector<int>>::iterator k;
-    //vector<int>::iterator j;
-    vector<int>promRGB;
-    int rojo=0, verde=0, azul=0;
-    for(unsigned int k=0; k<arr.size(); k++){
-        rojo+=arr[k][0];
-        verde+=arr[k][1];
-        azul+=arr[k][2];
-    }
-    rojo=rojo/arr.size();
-    verde=verde/arr.size();
-    azul=azul/arr.size();
-
-    promRGB[0]=rojo;
-    promRGB[1]=verde;
-    promRGB[2]=azul;
-
-    return promRGB;
-}
 
