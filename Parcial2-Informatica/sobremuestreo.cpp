@@ -35,7 +35,7 @@ void Sobremuestreo::Lectura(){
 void Sobremuestreo::Redimension(){
 
     ofstream escribir;
-    escribir.open("../Parcial2-Informatica/archivo.txt");
+    escribir.open("../Parcial2-Informatica/ImagenPixeles.txt");
     escribir<<"{";
 
     int pixelrojo,pixelverde,pixelazul,ancho,alto,limiteAL,limiteAN,avanzarf,avanzarc,columna,fila,cont1,cont2;
