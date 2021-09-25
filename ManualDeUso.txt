@@ -6,7 +6,7 @@ Siga las instrucciones paso a paso para obtener el resultado deseado.
 2. Una vez lo ejecute, le va a aparecer una consola negra pidiendole la ruta absoluta de la imagen que usted quiere mostrar.
 Ingresela, recordardando que para salir de la carpeta actual (Parcial2-Informática) debe usar "../", al igual que para acceder 
 a las carpetas que se encuentran fuera de ésta. Ejemplo: ../Escritorio/Imagenes/MiImagen
-3. Cuando se finalice el programa, revise la carpeta (build-Parcial2-Informática...) y allí encontrará un archivo llamado 
+3. Cuando se finalice el programa, revise la carpeta "Parcial2-Informática" y allí encontrará un archivo llamado 
 ImagenPixeles.txt, abra el archivo y copie todo su contenido.
 4. Dirijase a tinkercad, especificamente al proyecto llamado parcial2, abra el código (pestaña código) y copielo debajo del
 texto "int matriz2d[numLed][3]=".
