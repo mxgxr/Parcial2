@@ -10,9 +10,26 @@ Submuestreo::Submuestreo(QImage imagen)
         ytotal=(2*y+altoProm)/2;
         for(int x=0; x+anchoProm<=imagen.width(); x+=anchoProm){
             xtotal=(2*x+anchoProm)/2;
-            matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).red());
-            matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).green());
-            matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).blue());
+            if(imagen.pixelColor(xtotal,ytotal).red()==255){
+                matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).red()-5);
+            }
+            else{
+                matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).red());
+            }
+
+            if(imagen.pixelColor(xtotal,ytotal).green()==255){
+                matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).green()-5);
+            }
+            else{
+                matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).green());
+            }
+
+            if(imagen.pixelColor(xtotal,ytotal).blue()==255){
+                matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).blue()-5);
+            }
+            else{
+                matrizRGB.push_back(imagen.pixelColor(xtotal,ytotal).blue());
+            }
             matrizPixeles.push_back(matrizRGB);
             matrizRGB.clear();
         }
