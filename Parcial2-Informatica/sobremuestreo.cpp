@@ -32,14 +32,53 @@ void Sobremuestreo::Lectura(){
         matrizPixelesazules.push_back(filas);
     }
 }
+void Sobremuestreo::Lectuta(vector<vector<int>> matriz, int ancho, int alto){
+
+    vector<int>filas,vacio;
+    int avanzar;
+
+    avanzar=0;
+    for(int i=0;i<alto;i++){
+        filas=vacio;
+        for(int j=0; j<ancho;j++){
+            filas.push_back(matriz[avanzar][0]);
+            avanzar++;
+        }
+        matrizPixelesrojos.push_back(filas);
+    }
+    avanzar=0;
+    for(int i=0;i<alto;i++){
+        filas=vacio;
+        for(int j=0; j<ancho;j++){
+            filas.push_back(matriz[avanzar][1]);
+            avanzar++;
+        }
+        matrizPixelesverdes.push_back(filas);
+    }
+    avanzar=0;
+    for(int i=0;i<alto;i++){
+        filas=vacio;
+        for(int j=0; j<ancho;j++){
+            filas.push_back(matriz[avanzar][2]);
+            avanzar++;
+        }
+        matrizPixelesazules.push_back(filas);
+    }
+}
 void Sobremuestreo::Redimension(){
 
     ofstream escribir;
-    escribir.open("../Parcial2-Informatica/ImagenPixeles.txt");
-    escribir<<"{";
-
     int pixelrojo,pixelverde,pixelazul,ancho,alto,limiteAL,limiteAN,avanzarf,avanzarc,columna,fila,cont1,cont2;
     vector<int> matrizfilaR,matrizfilaG,matrizfilaB,vacio;
+
+    try {
+        escribir.open("../Parcial2-Informatica/ImagenPixeles.txt");
+        if(!escribir.is_open()){throw '1';}
+        escribir<<"{";
+    }
+    catch (char a ) {
+        if(a==1){cout << "Problema en la escritura del archivo" << endl;}
+    }
 
     //redimensionar y almacenar la matriz final en el archivo
     alto=matrizPixelesrojos.size();
