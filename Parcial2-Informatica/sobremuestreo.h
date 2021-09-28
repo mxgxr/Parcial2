@@ -17,6 +17,7 @@ public:
     void Lectura();
     void Lectuta(vector<vector<int>>,int,int);
     void Redimension();
+    void Redimension(int);
 };
 
 #endif // SOBREMUESTREO_H
