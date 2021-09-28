@@ -47,7 +47,7 @@
 Entre las clases que implementamos para la solucion de este problema fueron:
 
 \subsection{Función submuestreo: }
-Esta clase cuenta con dos atributos, el primero es un vector llamado matrizRGB que se encarga de almacenar los valores relacionados al RED, GREEN Y BLUE  que contiene cada pixel de la imagen leida; el segundo atributo es un vector de vectores llamado matrizPixeles que se encarga de almacenar el valor medio de un grupo de pixeles, guardando en cada una de sus posiciones un vector que contiene valores de RED, GREEN Y BLUE. A su vez, esta clase cuenta con dos métodos, el primero que es su constructor por defecto que recibe como parámetro de entrada una imagen de tipo QImage, en el constructor se realiza todo el proceso de submuestreo que se almacena en matrizPixeles, su segundo método llamado GuardarTxt se encarga de almacenar los valores de matrizPixeles en un formato específico en un archivo .txt para comodidad del usuario a la hora de trasladar estos valores a la plataforma tinkercad.
+Esta clase cuenta con dos atributos, el primero es un vector llamado matrizRGB que se encarga de almacenar los valores relacionados al RED, GREEN Y BLUE  que contiene cada pixel de la imagen leida; el segundo atributo es un vector de vectores llamado matrizPixeles que se encarga de almacenar el valor medio de un grupo de pixeles, guardando en cada una de sus posiciones un vector que contiene valores de RED, GREEN Y BLUE. A su vez, esta clase cuenta con cuatro métodos, el primero que es su constructor por defecto que recibe como parámetro de entrada una imagen de tipo QImage, en el constructor se realiza todo el proceso de submuestreo que se almacena en matrizPixeles, su segundo método es una sobrecarga del constructor que recibe una imagen de tipo QImage y un entero que indica el método a utilizar, este constructor solo se utiliza cuando la imagen necesita submuestreo en una única dimensión, al igual que el anterior constructor almacena los pixeles luego del submuestreo en matrizPixeles, su tercer método llamado GuardarTxt se encarga de almacenar los valores de matrizPixeles en un formato específico en un archivo .txt para comodidad del usuario a la hora de trasladar estos valores a la plataforma tinkercad, el cuarto y último método consiste en una función que va a permitir retornar el contenido de matrizPixeles.
 
 \subsection{Funcion sobremuestreo:}
 En esta funcion se implementan tres metodos, el constructor por defecto el cual tiene la funcion de recibir la ruta escrita por el usuario y almacenarla en un atributo privado de la clase para asi poder leer la imagen. Tambien un metodo llamdo lectura, que se encarga de leer cada pixel de la imagen de acuerdo al RGB y almacena cada valor en un vector de vectores (atributos privados de la clase), uno para los pixeles rojos, otro para los verdes y por ultimo los azules. El ultimo metodo implementado fue el de redimension, alli se hace el proceso de redimension de la imagen donde se itera sobre las matrices RGB y se van añadiendo pixeles teniendo encuenta las dimensiones originales y cuantos pixeles se deben agregar para llegar a una matriz de 12x12, en este mismo metodo almacenamos la matriz final ya redimensionada en un archivo .txt para asi utilizarlo como recurso para la implementacion en la plataforma de Tinkercard.
@@ -65,9 +65,13 @@ En esta funcion se implementan tres metodos, el constructor por defecto el cual 
 
 \item Metodos de la clase:
 
-\hspace{0.5cm}Submuestreo: permite tomar el valor medio de un conjunto de pixeles, determinado por el tamaño de la imagen y como ésta debe dividirse para encajar en la matriz de leds de 12x12. El proceso que se realiza parte desde el origen y toma un punto aledaño en el eje y y en el eje x, para hallar el pixel que se encuentra en medio de estos 3, de esta forma se reduce la cantidad de pixeles que tiene la imagen. 
+\hspace{0.5cm}Submuestreo(QImage): permite tomar el valor medio de un conjunto de pixeles, determinado por el tamaño de la imagen y como ésta debe dividirse para encajar en la matriz de leds de 12x12. El proceso que se realiza parte desde el origen y toma un punto aledaño en el eje y y en el eje x, para hallar el pixel que se encuentra en medio de estos 3, de esta forma se reduce la cantidad de pixeles que tiene la imagen. 
+
+\hspace{0.5cm}Submuestreo(QImage,int): según el tamaño de la imagen permite redimensionarla en el eje x o y, hallando el valor del pixel medio del dividisión del eje a submuestrear. Este proceso inicia en el origen del eje a submuestrear y toma dos puntos en este y toma el pixel que se encuentre en medio de los dos.
 
 \hspace{0.5cm}GuardarTxt: a partir de el vector de vectores matrizPixeles, almacena sus valores en un formato adecuado para copiar el contenido almacenado en el archivo ImagenPixeles y pegarlo adecuadamente en tinkercad.
+
+\hspace{0.5cm}getMatrizPixeles: retorna el vector matrizPixeles.
 
 
 \end{itemize}
@@ -219,7 +223,9 @@ Para la construcion del circuito hemos utilizado 12 tiras de 12 leds neopixel, p
 
 \item Cuando se buscó la forma de crear clases relacionadas a las funciones.
 
-\item Relacionado al repositorio, al principio nos costó entender como debíamos sincronizar los repositorios locales con los remotos.
+\item Relacionado al repositorio, al principio nos costó entender como debíamos sincronizar los repositorios locales con los remotos, también al intentar deshacer algunos cambios.
+
+\item Respecto a las indicaciones, ya que se preguntó si en una imagen de 18x10 se debía hacer submuestreo en una dimensión y sobremuestreo en otra, a lo cual la respuesta obtenida fue no, el último día el profesor Augusto indicó que el programa debía tener la capacidad de submuestrear y sobremuestrear este tipo de imagenes.
 
 
 
