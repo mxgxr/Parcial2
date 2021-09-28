@@ -1,5 +1,73 @@
 #include "submuestreo.h"
 
+Submuestreo::Submuestreo(QImage imagen, int metodo)
+{
+    int altoProm, anchoProm, xtotal=0, ytotal=0;
+    anchoProm=imagen.width()/12;
+    altoProm=imagen.height()/12;
+
+    if (metodo==1){ //submuestreo en x
+        for(int y=0; y<imagen.height(); y++){
+            for(int x=0; x+anchoProm<=imagen.width(); x+=anchoProm){
+                xtotal=(2*x+anchoProm)/2;
+                if(imagen.pixelColor(xtotal,y).red()==255){
+                    matrizRGB.push_back(imagen.pixelColor(xtotal,y).red()-5);
+                }
+                else{
+                    matrizRGB.push_back(imagen.pixelColor(xtotal,y).red());
+                }
+
+                if(imagen.pixelColor(xtotal,y).green()==255){
+                    matrizRGB.push_back(imagen.pixelColor(xtotal,y).green()-5);
+                }
+                else{
+                    matrizRGB.push_back(imagen.pixelColor(xtotal,y).green());
+                }
+
+                if(imagen.pixelColor(xtotal,y).blue()==255){
+                    matrizRGB.push_back(imagen.pixelColor(xtotal,y).blue()-5);
+                }
+                else{
+                    matrizRGB.push_back(imagen.pixelColor(xtotal,y).blue());
+                }
+                matrizPixeles.push_back(matrizRGB);
+                matrizRGB.clear();
+            }
+        }
+    }
+    else if (metodo==2){ //submuestreo en y
+        for(int x=0; x<imagen.width(); x++){
+            for(int y=0; y+altoProm<=imagen.height(); y+=altoProm){
+                ytotal=(2*y+altoProm)/2;
+
+                if(imagen.pixelColor(x,ytotal).red()==255){
+                    matrizRGB.push_back(imagen.pixelColor(x,ytotal).red()-5);
+                }
+                else{
+                    matrizRGB.push_back(imagen.pixelColor(x,ytotal).red());
+                }
+
+                if(imagen.pixelColor(x,ytotal).green()==255){
+                    matrizRGB.push_back(imagen.pixelColor(x,ytotal).green()-5);
+                }
+                else{
+                    matrizRGB.push_back(imagen.pixelColor(x,ytotal).green());
+                }
+
+                if(imagen.pixelColor(x,ytotal).blue()==255){
+                    matrizRGB.push_back(imagen.pixelColor(x,ytotal).blue()-5);
+                }
+                else{
+                    matrizRGB.push_back(imagen.pixelColor(x,ytotal).blue());
+                }
+                matrizPixeles.push_back(matrizRGB);
+                matrizRGB.clear();
+            }
+        }
+    }
+
+}
+
 Submuestreo::Submuestreo(QImage imagen)
 {
     int altoProm, anchoProm, xtotal=0, ytotal=0;
@@ -35,6 +103,11 @@ Submuestreo::Submuestreo(QImage imagen)
         }
     }
 
+}
+
+vector<vector<int>> Submuestreo::getMatrizPixeles() const
+{
+    return matrizPixeles;
 }
 
 void Submuestreo::GuardarTxt()

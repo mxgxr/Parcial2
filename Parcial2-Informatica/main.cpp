@@ -13,12 +13,14 @@ string formatoTexto(vector<vector<int>> &array);
 
 int main()
 {
-    string ruta;
+    string nomImg, ruta="../Parcial2-Informatica/images";
 
-    cout << "Ingrese la ruta de la imagen a cargar: " << endl;
-    cin >> ruta;
+    cout << "Ingrese el nombre de la imagen a cargar y su extension: " << endl;
+    cin >> nomImg;
 
-     QImage imagen(ruta.c_str());
+    ruta+=nomImg;
+
+    QImage imagen(ruta.c_str());
 
     if(imagen.width()<12 and imagen.height()<12){
         Sobremuestreo uno(ruta);
@@ -29,8 +31,12 @@ int main()
         Submuestreo dos(imagen);
         dos.GuardarTxt();
     }
-
-
+    else if(imagen.width()>=12 and imagen.height()<12){
+        Submuestreo tres(imagen,1);
+    }
+    else if(imagen.width()<12 and imagen.height()>=12){
+        Submuestreo cuatro(imagen,2);
+    }
 
     return 0;
 }
