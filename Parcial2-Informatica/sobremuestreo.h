@@ -15,6 +15,7 @@ private:
 public:
     Sobremuestreo(string);
     void Lectura();
+    void Lectuta(vector<vector<int>>,int,int);
     void Redimension();
 };
 
