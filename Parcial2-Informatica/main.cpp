@@ -23,7 +23,7 @@ int main()
 
     QImage imagen(ruta.c_str());
 
-    if(imagen.width()<12 and imagen.height()<12){
+    if(imagen.width()<=12 and imagen.height()<=12){
         Sobremuestreo uno(ruta);
         uno.Lectura();
         uno.Redimension();
@@ -32,23 +32,19 @@ int main()
         Submuestreo dos(imagen);
         dos.GuardarTxt();
     }
-    else if(imagen.width()>=12 and imagen.height()<12){
-        Submuestreo ancho(imagen,1);
-        matrizrgb=ancho.getMatrizPixeles();
-        Sobremuestreo alto(ruta);
-        alto.Lectuta(matrizrgb,12,imagen.height());
-        alto.Redimension();
+    else if(imagen.width()>12 and imagen.height()<12){
+        Submuestreo tres(imagen,1);
+        matrizrgb=tres.getMatrizPixeles();
+        Sobremuestreo cuatro(ruta);
+        cuatro.Lectuta(matrizrgb,12,imagen.height());
+        cuatro.Redimension(1);
     }
-    else if(imagen.width()<12 and imagen.height()>=12){
-        Submuestreo alto(imagen,2);
-        alto.getMatrizPixeles();
-        Sobremuestreo ancho(ruta);
-        ancho.Lectuta(matrizrgb,imagen.width(),12);
-        ancho.Redimension();
+    else if(imagen.width()<12 and imagen.height()>12){
+        Submuestreo cinco(imagen,2);
+        matrizrgb=cinco.getMatrizPixeles();
+        Sobremuestreo seis(ruta);
+        seis.Lectuta(matrizrgb,imagen.width(),12);
+        seis.Redimension(2);
     }
     return 0;
 }
-
-
-
-

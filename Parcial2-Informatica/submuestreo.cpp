@@ -36,8 +36,8 @@ Submuestreo::Submuestreo(QImage imagen, int metodo)
         }
     }
     else if (metodo==2){ //submuestreo en y
-        for(int x=0; x<imagen.width(); x++){
-            for(int y=0; y+altoProm<=imagen.height(); y+=altoProm){
+        for(int y=0; y+altoProm<=imagen.height(); y+=altoProm){
+            for(int x=0; x<imagen.width(); x++){
                 ytotal=(2*y+altoProm)/2;
 
                 if(imagen.pixelColor(x,ytotal).red()==255){
